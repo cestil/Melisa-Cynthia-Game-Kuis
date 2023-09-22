@@ -18,7 +18,10 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        _playerProgress.SimpanProgress();
+        if (!_playerProgress.MuatProgress())
+        {
+            _playerProgress.SimpanProgress();
+        }
 
         NextLevel();
     }
