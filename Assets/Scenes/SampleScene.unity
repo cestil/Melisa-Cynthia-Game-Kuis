@@ -2083,47 +2083,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c94a50e6b4f024a42910e6fdb0d5072e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soalSoal:
-  - pertanyaan: Warna mawar yang menjadi trademark pada film Beauty & the Beast?
-    petunjukJawaban: {fileID: 21300000, guid: 8447c6fa90ccbb54d9a200add6049bec, type: 3}
-    pilihanJawaban:
-    - Merah
-    - Putih
-    - Kuning
-    - Ungu
-    adalahBenar: 01000000
-  - pertanyaan: Warna langit cerah?
-    petunjukJawaban: {fileID: 21300000, guid: 4bdb87116c6498a4a8c260ae72228523, type: 3}
-    pilihanJawaban:
-    - Abu-abu
-    - Hijau
-    - Biru
-    - Pink
-    adalahBenar: 00000100
-  - pertanyaan: Warna daun segar?
-    petunjukJawaban: {fileID: 21300000, guid: f921ca1fad09cea42bd78571ef729bbd, type: 3}
-    pilihanJawaban:
-    - Biru
-    - Oranye
-    - Kuning
-    - Hijau
-    adalahBenar: 00000001
-  - pertanyaan: Warna sinar matahari pagi?
-    petunjukJawaban: {fileID: 21300000, guid: ae1c43821ceac574ea8a32fcde9b5d66, type: 3}
-    pilihanJawaban:
-    - Putih
-    - Tungsten
-    - Kuning
-    - Fluorescent
-    adalahBenar: 00000100
-  - pertanyaan: Warna air laut pada umumnya?
-    petunjukJawaban: {fileID: 21300000, guid: bab9eff70bc0c574ab4276744b38f61c, type: 3}
-    pilihanJawaban:
-    - Hijau Daun
-    - Biru
-    - Kuning
-    - Putih
-    adalahBenar: 00010000
+  _playerProgress: {fileID: 11400000, guid: c984467834d01a74aa44af0705e225a6, type: 2}
+  _soalSoal: {fileID: 11400000, guid: 720b68a0396835242980dfc2a86fa95b, type: 2}
   _pertanyaan: {fileID: 569215963}
   _pilihanJawaban:
   - {fileID: 844168177}
