@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pertanyaan: Warna langit cerah?
   petunjukJawaban: {fileID: 21300000, guid: 4bdb87116c6498a4a8c260ae72228523, type: 3}
+  levelPackIndex: 1
   opsiJawaban:
   - jawabanTeks: Abu-abu
     adalahBenar: 0
   - jawabanTeks: Hijau
     adalahBenar: 0
   - jawabanTeks: Biru
-    adalahBenar: 0
+    adalahBenar: 1
   - jawabanTeks: Pink
     adalahBenar: 0

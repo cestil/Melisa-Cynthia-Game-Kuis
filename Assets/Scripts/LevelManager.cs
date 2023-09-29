@@ -5,8 +5,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private InisialDataGameplay _inisialData = null;
 
-    //[SerializeField]
-    //private PlayerProgress _playerProgress = null;
+    [SerializeField]
+    private PlayerProgress _playerProgress = null;
 
     [SerializeField]
     private LevelPackKuis _soalSoal = null;
@@ -36,6 +36,31 @@ public class LevelManager : MonoBehaviour
         _indexSoal = _inisialData.levelIndex - 1;
 
         NextLevel();
+
+        // 1. Subscribe Event
+        UI_PoinJawaban.EventJawabSoal += UI_PoinJawaban_EventJawabSoal;
+    }
+
+    // 2. Method yang akan dijalankan setiap kali tombol pilihan jawaban diklik
+    private void UI_PoinJawaban_EventJawabSoal(string jawaban, bool adalahBenar)
+    {
+        // Jika jawaban yang dipilih benar, player akan mendapatkan 20 koin
+        if (adalahBenar)
+        {
+            _playerProgress.progressData.koin += 20;
+        }
+    }
+
+    // 3. Unsubscribe Event
+    private void OnDestroy()
+    {
+        UI_PoinJawaban.EventJawabSoal -= UI_PoinJawaban_EventJawabSoal;
+    }
+
+    // Method yang dijalankan setiap kali player Quit dari app nya.
+    private void OnApplicationQuit()
+    {
+        _inisialData.SaatKalah = false;
     }
 
     public void NextLevel()

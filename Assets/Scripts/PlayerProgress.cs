@@ -24,7 +24,7 @@ public class PlayerProgress : ScriptableObject
     public void SimpanProgress()
     {
         // Sampel Data
-        progressData.koin = 200;
+        //progressData.koin = 200;
         if (progressData.progressLevel == null)
             progressData.progressLevel = new();
         progressData.progressLevel.Add("Level Pack 1", 3);
