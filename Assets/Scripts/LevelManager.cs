@@ -3,7 +3,10 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     [SerializeField]
-    private PlayerProgress _playerProgress = null;
+    private InisialDataGameplay _inisialData = null;
+
+    //[SerializeField]
+    //private PlayerProgress _playerProgress = null;
 
     [SerializeField]
     private LevelPackKuis _soalSoal = null;
@@ -14,14 +17,23 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private UI_PoinJawaban[] _pilihanJawaban = new UI_PoinJawaban[0];
 
+    [SerializeField]
+    private GameSceneManager _gameSceneManager = null;
+
+    [SerializeField]
+    private string _namaSceneMenuPilihLevel = string.Empty;
+
     private int _indexSoal = -1;
 
     private void Start()
     {
-        if (!_playerProgress.MuatProgress())
-        {
-            _playerProgress.SimpanProgress();
-        }
+        //if (!_playerProgress.MuatProgress())
+        //{
+        //    _playerProgress.SimpanProgress();
+        //}
+
+        _soalSoal = _inisialData.levelPack;
+        _indexSoal = _inisialData.levelIndex - 1;
 
         NextLevel();
     }
@@ -31,10 +43,17 @@ public class LevelManager : MonoBehaviour
         // Soal index selanjutnya
         _indexSoal++;
 
-        // Jika index melampaui soal terakhir, ulang dari awal
+        
+        // Jika index melampaui soal terakhir, 
         if (_indexSoal >= _soalSoal.BanyakLevel)
         {
-            _indexSoal = 0;
+            //// Old: Ulang soal dari awal / dari soal pertama
+            //_indexSoal = 0;
+
+            // New: Kembali ke scene Menu Pilih Level
+            _gameSceneManager.BukaScene(_namaSceneMenuPilihLevel);
+            // Agar prosedur di bawahnya tidak perlu dijalankan, karena di atas sudah pindah scene.
+            return;
         }
 
         // Ambil data Pertanyaan

@@ -16,7 +16,7 @@ public class PlayerProgress : ScriptableObject
     }
 
     [SerializeField]
-    private string _filename = "contoh.txt";
+    private string _filename = "Save1.txt";
 
     public MainData progressData = new MainData();
 
@@ -31,7 +31,7 @@ public class PlayerProgress : ScriptableObject
         progressData.progressLevel.Add("Level Pack 3", 5);
 
         // Informasi penyimpanan data
-        var directory = Application.dataPath + "/Temporary";
+        var directory = Application.dataPath + "/Save Temp";
         var path = directory + "/" + _filename;
 
         // Membuat Directory Temporary
@@ -96,7 +96,7 @@ public class PlayerProgress : ScriptableObject
     public bool MuatProgress()
     {
         // Informasi penyimpanan data
-        var directory = Application.dataPath + "/Temporary";
+        var directory = Application.dataPath + "/Save Temp";
         var path = directory + "/" + _filename;
 
         var fileStream = File.Open(path, FileMode.OpenOrCreate);
