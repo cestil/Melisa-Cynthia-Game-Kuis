@@ -32,7 +32,8 @@ public class UI_OpsiLevelKuis : MonoBehaviour
 
     public void SetLevelSoal(LevelSoalKuis levelSoal, int index)
     {
-        _levelName.text = levelSoal.name;
+        //_levelName.text = levelSoal.name;
+        _levelName.text = $"Level {index + 1}";
         _levelSoal = levelSoal;
 
         _levelSoal.levelPackIndex = index;

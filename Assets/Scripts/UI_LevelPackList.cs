@@ -15,7 +15,7 @@ public class UI_LevelPackList : MonoBehaviour
     [SerializeField]
     private RectTransform _content = null;
 
-    [Space, SerializeField]
+    [SerializeField]
     private LevelPackKuis[] _levelPacks = new LevelPackKuis[0];
 
     private void Start()

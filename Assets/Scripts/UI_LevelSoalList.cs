@@ -11,7 +11,7 @@ public class UI_LevelSoalList : MonoBehaviour
     [SerializeField]
     private RectTransform _content = null;
 
-    [Space, SerializeField]
+    [SerializeField]
     private LevelPackKuis _levelPack = null;
 
     [SerializeField]

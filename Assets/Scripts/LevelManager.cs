@@ -85,7 +85,7 @@ public class LevelManager : MonoBehaviour
         LevelSoalKuis soal = _soalSoal.AmbilLevelKe(_indexSoal);
 
         // Set informasi soal
-        _pertanyaan.SetPertanyaan($"Level A-{_indexSoal + 1}", soal.pertanyaan, soal.petunjukJawaban);
+        _pertanyaan.SetPertanyaan($"Level {_indexSoal + 1}", soal.pertanyaan, soal.petunjukJawaban);
 
         for (int i = 0; i < _pilihanJawaban.Length; i++)
         {
