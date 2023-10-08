@@ -3,6 +3,11 @@ using UnityEngine;
 
 public class UI_PesanLevel : MonoBehaviour
 {
+    //--- Animations
+    [SerializeField]
+    private Animator _animator = null;
+    //---
+
     [SerializeField]
     private GameObject _opsiMenang = null;
 
@@ -56,6 +61,9 @@ public class UI_PesanLevel : MonoBehaviour
             _opsiMenang.SetActive(false);
             _opsiKalah.SetActive(true);
         }
+
+        //--- Animations
+        _animator.SetBool("Menang", adalahBenar);
     }
 
 

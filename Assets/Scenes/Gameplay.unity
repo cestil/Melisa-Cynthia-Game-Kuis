@@ -3984,6 +3984,7 @@ GameObject:
   - component: {fileID: 1940691940}
   - component: {fileID: 1940691939}
   - component: {fileID: 1940691938}
+  - component: {fileID: 1940691941}
   m_Layer: 5
   m_Name: Message Console
   m_TagString: Untagged
@@ -4023,6 +4024,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d416ecda09b3a2142938f59e49688f0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animator: {fileID: 1940691941}
   _opsiMenang: {fileID: 1844423835}
   _opsiKalah: {fileID: 830915250}
   _tempatPesan: {fileID: 1015314998}
@@ -4076,6 +4078,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1940691935}
   m_CullTransparentMesh: 1
+--- !u!95 &1940691941
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1940691935}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 01d3daa089289d54882fd6b7b407dafe, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2001750790
 GameObject:
   m_ObjectHideFlags: 0

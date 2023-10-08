@@ -2,6 +2,11 @@ using UnityEngine;
 
 public class UI_LevelPackList : MonoBehaviour
 {
+    //--- Animations Things
+    [SerializeField]
+    private Animator _animator = null;
+    //---
+
     [SerializeField]
     private InisialDataGameplay _inisialData = null;
 
@@ -68,13 +73,15 @@ public class UI_LevelPackList : MonoBehaviour
         // ^ Jika level pack terkunci, code di bawah tidak akan dijalankan
 
         //Buka object menu Levels (menampilkan isi (Level-Level) dari menu Level Pack)
-        _levelList.gameObject.SetActive(true);
+        //_levelList.gameObject.SetActive(true);
         _levelList.UnloadLevelPack(levelPack);
 
-        // Menutup object menu Level Packs
-        gameObject.SetActive(false);
+        //// Menutup object menu Level Packs
+        //gameObject.SetActive(false);
 
         _inisialData.levelPack = levelPack;
+
+        _animator.SetTrigger("ToLevels");
     }
 
     // 3. Unsubscribe Event (pakai "-=") (wajib untuk menghindari Memory Leak)
