@@ -16,22 +16,45 @@ public class PlayerProgress : ScriptableObject
     }
 
     [SerializeField]
-    private string _filename = "Save1.txt";
+    private string _filename = "Save000.txt";
+
+    [SerializeField]
+    private string _startingLevelPackName = string.Empty;
 
     public MainData progressData = new MainData();
 
     // Method untuk men-save File
     public void SimpanProgress()
     {
-        // Sampel Data
-        //progressData.koin = 200;
-        if (progressData.progressLevel == null)
-            progressData.progressLevel = new();
-        progressData.progressLevel.Add("Level Pack 1", 3);
-        progressData.progressLevel.Add("Level Pack 3", 5);
+        //// Sampel Data
+        ////progressData.koin = 200;
+        //if (progressData.progressLevel == null)
+        //    progressData.progressLevel = new();
+        //progressData.progressLevel.Add("Level Pack 1", 3);
+        //progressData.progressLevel.Add("Level Pack 3", 5);
 
-        // Informasi penyimpanan data
+        // Simpan Starting Data saat obyek Dictionary belum ada saat Player Progress dimuat/di-load
+        // Sebagai data awal "New Game" jika player belum mempunyai save file sama sekali:
+        if (progressData.progressLevel == null)
+        {
+            progressData.progressLevel = new();
+            progressData.koin = 0;
+            progressData.progressLevel.Add(_startingLevelPackName, 1);
+        }
+
+
+
+        // Informasi penyimpanan data, untuk menentukan path penyimpanan data di berbagai platform:
         var directory = Application.dataPath + "/Save Temp";
+// elif = singkatann dari else if
+// endif untuk menutup blok kodingan pre-proses, yang dijalankan 1x saat build game,
+    // untuk memangkas script coding yang perlu dibuang dan dikompilasikan
+    // contoh: Saat sudah jadi software APK di Andro, baris directory = dataPath dihapus
+#if UNIT_EDITOR
+        string directory = Application.dataPath + "/Save Temp/"; 
+#elif (UNITY_ADROID || UNITY_IOS) && !UNITY_EDITOR
+        string directory = Application.persistentDataPath + "/Progress/";
+#endif
         var path = directory + "/" + _filename;
 
         // Membuat Directory Temporary
@@ -97,6 +120,11 @@ public class PlayerProgress : ScriptableObject
     {
         // Informasi penyimpanan data
         var directory = Application.dataPath + "/Save Temp";
+#if UNIT_EDITOR
+        string directory = Application.dataPath + "/Save Temp/"; 
+#elif (UNITY_ADROID || UNITY_IOS) && !UNITY_EDITOR
+        string directory = Application.persistentDataPath + "/Progress/";
+#endif
         var path = directory + "/" + _filename;
 
         var fileStream = File.Open(path, FileMode.OpenOrCreate);

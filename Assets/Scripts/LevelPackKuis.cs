@@ -14,4 +14,10 @@ public class LevelPackKuis : ScriptableObject
     {
         return _isiLevel[index];
     }
+
+    [SerializeField]
+    private int _harga = 0;
+
+    // Property Getter saja agar obyek di luar hanya dapet membaca informasi saja.
+    public int Harga => _harga;
 }

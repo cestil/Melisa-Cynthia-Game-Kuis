@@ -15,42 +15,58 @@ public class UI_LevelPackList : MonoBehaviour
     [SerializeField]
     private RectTransform _content = null;
 
-    [SerializeField]
-    private LevelPackKuis[] _levelPacks = new LevelPackKuis[0];
+    //// Dipindah ke LevelMenuDataManager
+    //[SerializeField]
+    //private LevelPackKuis[] _levelPacks = new LevelPackKuis[0];
 
     private void Start()
     {
-        LoadLevelPack();
+        //LoadLevelPack();
 
         if (_inisialData.SaatKalah)
         {
-            UI_OpsiLevelPack_EventSaatKlik(_inisialData.levelPack);
+            UI_OpsiLevelPack_EventSaatKlik(null, _inisialData.levelPack, false);
+            // ^ false agar level pack tetap terbuka walaupun player telah kalah?
+            // ^ set null untuk bagian tombolnya karena memang pada bagian/saat ini tidak ada tombolnya.
         }
 
         // 1. Subscribe Event (pakai "+=", kemudian pencet Tab untuk otomatis membuat Method)
         UI_OpsiLevelPack.EventSaatKlik += UI_OpsiLevelPack_EventSaatKlik;
     }
 
-    private void LoadLevelPack()
+    // Ubah dari private ke public..
+    public void LoadLevelPack(LevelPackKuis[] levelPacks, PlayerProgress.MainData playerData)
     {
-        foreach (var lp in _levelPacks)
+        foreach (var lp in levelPacks)
         {
-            // Membuat salinan obyek dari prefab Pack Button
+            // ^ lp dalam konteks ini merupakan setiap level pack yang ada di dalam list LevelPackKuis
+
+            // Membuat t = salinan obyek dari prefab Pack Button
             var t = Instantiate(_tombolPack);
 
             t.SetLevelPack(lp);
 
             // Memasukan salinan tersebut sebagai child dari obyek "content"
             t.transform.SetParent(_content);
-
             // Mengatur scale salinan tersebut secara procedural agar tidak terlalu besar
             t.transform.localScale = Vector3.one;
+
+            // Mengecek apakah level pack terdaftar di Dictionary progress player:
+            if (!playerData.progressLevel.ContainsKey(lp.name))
+            {
+                // Jika tidak terdaftar, maka level pack terkunci
+                t.KunciLevelPack();
+            }
         }
     }
 
     // 2. Method yang akan dijalankan saat button diklik
-    private void UI_OpsiLevelPack_EventSaatKlik(LevelPackKuis levelPack)
+    private void UI_OpsiLevelPack_EventSaatKlik(UI_OpsiLevelPack tombolLevelPack, LevelPackKuis levelPack, bool terkunci)
     {
+        if (terkunci)
+            return;
+        // ^ Jika level pack terkunci, code di bawah tidak akan dijalankan
+
         //Buka object menu Levels (menampilkan isi (Level-Level) dari menu Level Pack)
         _levelList.gameObject.SetActive(true);
         _levelList.UnloadLevelPack(levelPack);

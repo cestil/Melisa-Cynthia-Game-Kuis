@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 578f9ee08a2f00e4db15138b6eab9ff6, type: 3}
   m_Name: Inisial Data Gameplay
   m_EditorClassIdentifier: 
-  levelPack: {fileID: 0}
+  levelPack: {fileID: 11400000, guid: 720b68a0396835242980dfc2a86fa95b, type: 2}
   levelIndex: 0
+  _saatKalah: 0

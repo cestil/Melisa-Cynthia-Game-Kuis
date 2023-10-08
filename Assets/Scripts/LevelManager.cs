@@ -27,11 +27,6 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        //if (!_playerProgress.MuatProgress())
-        //{
-        //    _playerProgress.SimpanProgress();
-        //}
-
         _soalSoal = _inisialData.levelPack;
         _indexSoal = _inisialData.levelIndex - 1;
 
@@ -44,10 +39,24 @@ public class LevelManager : MonoBehaviour
     // 2. Method yang akan dijalankan setiap kali tombol pilihan jawaban diklik
     private void UI_PoinJawaban_EventJawabSoal(string jawaban, bool adalahBenar)
     {
-        // Jika jawaban yang dipilih benar, player akan mendapatkan 20 koin
-        if (adalahBenar)
+        // Jika jawaban yang dipilih salah, langsung return;
+        if (!adalahBenar) return;
+
+        // Untuk mengecek nama level pack dan soal/level terakhir yang dimainkan,
+        string namaLevelPack = _inisialData.levelPack.name;
+        int levelTerakhir = _playerProgress.progressData.progressLevel[namaLevelPack];
+
+        // Cek apabila level yang dimainkan terakhir kali terselesaikan,
+        if (_indexSoal + 2 > levelTerakhir)
         {
+            // Jika jawaban yang dipilih benar, player akan mendapatkan 20 koin
             _playerProgress.progressData.koin += 20;
+
+            // Menambahkan value progress level agar player sudah dapat mengakses level selanjutnya:
+            _playerProgress.progressData.progressLevel[namaLevelPack] = _indexSoal + 2;
+
+            // Kemudian, Save progress:
+            _playerProgress.SimpanProgress();
         }
     }
 

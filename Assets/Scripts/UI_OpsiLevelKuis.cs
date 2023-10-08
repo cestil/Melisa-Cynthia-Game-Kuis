@@ -15,6 +15,14 @@ public class UI_OpsiLevelKuis : MonoBehaviour
     [SerializeField]
     private LevelSoalKuis _levelSoal = null;
 
+    // Karena tombol level/soal tidak boleh dapat diakses dari luar mana-mana,
+    public bool InteraksiTombol
+    {
+        // Mengatur apakah tombol dapat diinteraksikan pemain atau tidak, tergantung value nya nanti
+        get => _tombolLevel.interactable;
+        set => _tombolLevel.interactable = value;
+    }
+
     private void Start()
     {
         if (_levelSoal != null)
