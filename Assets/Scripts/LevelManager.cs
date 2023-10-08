@@ -23,14 +23,35 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private string _namaSceneMenuPilihLevel = string.Empty;
 
+
+    // ----- Untuk Memasukan SFX kondisi Menang & Kalah:
+
+    [SerializeField]
+    private PemanggilSuara _pemanggilSuara = null;
+
+    [SerializeField]
+    private AudioClip _suaraMenang = null;
+
+    [SerializeField]
+    private AudioClip _suaraKalah = null;
+
+    // -----
+
     private int _indexSoal = -1;
 
     private void Start()
     {
+        // Ini masih perlu gak sih?
         _soalSoal = _inisialData.levelPack;
+
         _indexSoal = _inisialData.levelIndex - 1;
 
         NextLevel();
+
+        // Untuk memainkan BGM kedua setiap kali obyek Level Manager (yang hanya ada pada scene Gameplay) muncul:
+        // Mengakses method (harus) public PlayBGM pada script AudioManager:
+        // Pakai instance na, lalu masukan index audio clip BGM di dalam ( ) na:
+        AudioManager.instance.PlayBGM(1);
 
         // 1. Subscribe Event
         UI_PoinJawaban.EventJawabSoal += UI_PoinJawaban_EventJawabSoal;
@@ -39,6 +60,10 @@ public class LevelManager : MonoBehaviour
     // 2. Method yang akan dijalankan setiap kali tombol pilihan jawaban diklik
     private void UI_PoinJawaban_EventJawabSoal(string jawaban, bool adalahBenar)
     {
+        // SFX Memang atau Kalah, pakai Tenary Condition saja biar lebih singkat dibanding pakai if else:
+        _pemanggilSuara.PanggilSuara(adalahBenar ? _suaraMenang : _suaraKalah);
+        // ^ Jadi, dicek apakah adalahBenar? Jika adalahBenar, maka jalankan _suaraMenang, jika tidak, jalankan _suaraKalah
+
         // Jika jawaban yang dipilih salah, langsung return;
         if (!adalahBenar) return;
 

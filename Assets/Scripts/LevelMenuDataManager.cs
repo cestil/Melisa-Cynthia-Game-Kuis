@@ -17,7 +17,7 @@ public class LevelMenuDataManager : MonoBehaviour
     [SerializeField]
     private LevelPackKuis[] _levelPacks = new LevelPackKuis[0];
 
-    // Start is called before the first frame update
+
     void Start()
     {
         if (!_playerProgress.MuatProgress())
@@ -28,5 +28,8 @@ public class LevelMenuDataManager : MonoBehaviour
         _levelPackList.LoadLevelPack(_levelPacks, _playerProgress.progressData);
 
         _tempatScore.text = $"{_playerProgress.progressData.koin}";
+
+        // Untuk memainkan kembali BGM pertama setiap kali obyek Level Menu Data Manager (yang hanya ada pada scene Menu Pilih Level) muncul:
+        AudioManager.instance.PlayBGM(0);
     }
 }
