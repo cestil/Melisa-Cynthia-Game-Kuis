@@ -16,7 +16,7 @@ public class PlayerProgress : ScriptableObject
     }
 
     [SerializeField]
-    private string _filename = "Save000.txt";
+    private string _filename = "Save1.txt";
 
     [SerializeField]
     private string _startingLevelPackName = string.Empty;
@@ -42,28 +42,17 @@ public class PlayerProgress : ScriptableObject
             progressData.progressLevel.Add(_startingLevelPackName, 1);
         }
 
-
-
-        // Informasi penyimpanan data, untuk menentukan path penyimpanan data di berbagai platform:
-        var directory = Application.dataPath + "/Save Temp";
+// Informasi penyimpanan data, untuk menentukan path penyimpanan data di berbagai platform:
 // elif = singkatann dari else if
 // endif untuk menutup blok kodingan pre-proses, yang dijalankan 1x saat build game,
     // untuk memangkas script coding yang perlu dibuang dan dikompilasikan
     // contoh: Saat sudah jadi software APK di Andro, baris directory = dataPath dihapus
-#if UNIT_EDITOR
-        string directory = Application.dataPath + "/Save Temp/"; 
-#elif (UNITY_ADROID || UNITY_IOS) && !UNITY_EDITOR
+#if UNITY_EDITOR
+        string directory = Application.dataPath + "/Progress/"; 
+#elif (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
         string directory = Application.persistentDataPath + "/Progress/";
 #endif
         var path = directory + "/" + _filename;
-
-        // Membuat Directory Temporary
-        // Jika directory belum ada sama sekali, maka buat directory baru.
-        if (!Directory.Exists(directory))
-        {
-            Directory.CreateDirectory(directory);
-            Debug.Log("a new Directory has been created: " + directory);
-        }
 
         //Membuat file baru
         // Jika file belum ada sama sekali, maka buat file baru.
@@ -72,7 +61,6 @@ public class PlayerProgress : ScriptableObject
             File.Create(path).Dispose();
             Debug.Log("a new Save File has been created: " + path);
         }
-
 
         // Menyimpan data ke dalam file menggunakan binari formatter
         var fileStream = File.Open(path, FileMode.OpenOrCreate);
@@ -118,14 +106,21 @@ public class PlayerProgress : ScriptableObject
     // Method untuk me-load Save File yang sudah ada
     public bool MuatProgress()
     {
-        // Informasi penyimpanan data
-        var directory = Application.dataPath + "/Save Temp";
-#if UNIT_EDITOR
-        string directory = Application.dataPath + "/Save Temp/"; 
-#elif (UNITY_ADROID || UNITY_IOS) && !UNITY_EDITOR
+// Informasi penyimpanan data, untuk menentukan path penyimpanan data di berbagai platform:
+#if UNITY_EDITOR
+        string directory = Application.dataPath + "/Progress/"; 
+#elif (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
         string directory = Application.persistentDataPath + "/Progress/";
 #endif
         var path = directory + "/" + _filename;
+
+        // Membuat Directory Temporary
+        // Jika directory belum ada sama sekali, maka buat directory baru.
+        if (!Directory.Exists(directory))
+        {
+            Directory.CreateDirectory(directory);
+            Debug.Log("a new Directory has been created: " + directory);
+        }
 
         var fileStream = File.Open(path, FileMode.OpenOrCreate);
 
@@ -185,7 +180,7 @@ public class PlayerProgress : ScriptableObject
             // Putuskan aliran memori dengan file menggunakan dispose
             fileStream.Dispose();
 
-            Debug.Log($"Data Loaded: Koin: {progressData.koin}; Level Played: {progressData.progressLevel.Count}");
+            Debug.Log($"Data Loaded: Koin: {progressData.koin}; Level Pack Unlocked: {progressData.progressLevel.Count}");
 
             return true;
         }
